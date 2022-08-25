@@ -355,7 +355,6 @@ export const PlaylistPlayer = ({ playlists }) => {
     } else {
       toast.error("Please Enter Valid Name !");
       setnewplaylistName("");
-
     }
   };
 
@@ -1313,9 +1312,6 @@ export const PlaylistPlayer = ({ playlists }) => {
                   {allYoutubeSearchVideoData.length != 0 ? (
                     <button
                       onClick={() => {
-                        if (searchKeyword == "") {
-                          // alert("Please Search Something");
-                        }
                         {
                           if (searchKeyword !== "") {
                             setYoutubePlay(true);
@@ -1408,60 +1404,87 @@ export const PlaylistPlayer = ({ playlists }) => {
                   className="col-4 my-2 addListButton"
                 >
                   <div className="todayList  buttonPadding">
-                    <button
-                      onClick={() => {
-                        setYoutubeDatainState(
-                          allYoutubeSearchVideoData[videoIndex].snippet.title,
-                          "https://www.youtube.com/watch?v=" +
-                            allYoutubeSearchVideoData[videoIndex].id.videoId,
-                          allYoutubeSearchVideoData[videoIndex].views,
-                          allYoutubeSearchVideoData[videoIndex].likes,
-                          allYoutubeSearchVideoData[videoIndex].snippet
-                            .publishTime,
-                          moment
-                            .duration(
-                              allYoutubeSearchVideoData[videoIndex].duration
-                            )
-                            .asSeconds(),
-                          (allYoutubeSearchVideoData[videoIndex].tags = null),
-                          allYoutubeSearchVideoData[videoIndex].snippet
-                            .channelTitle,
-                          "https://www.youtube.com/channel/" +
+                    {searchKeyword !== "" ? (
+                      <button
+                        onClick={() => {
+                          setYoutubeDatainState(
+                            allYoutubeSearchVideoData[videoIndex].snippet.title,
+                            "https://www.youtube.com/watch?v=" +
+                              allYoutubeSearchVideoData[videoIndex].id.videoId,
+                            allYoutubeSearchVideoData[videoIndex].views,
+                            allYoutubeSearchVideoData[videoIndex].likes,
                             allYoutubeSearchVideoData[videoIndex].snippet
-                              .channelId,
-                          allYoutubeSearchVideoData[videoIndex].snippet
-                            .thumbnails.high.url,
-                          allYoutubeSearchVideoData[videoIndex].snippet
-                            .description,
-                          '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
-                            allYoutubeSearchVideoData[videoIndex].id.videoId +
-                            '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                          allYoutubeSearchVideoData[videoIndex].category,
-                          null
-                        );
-                      }}
-                      className="btn w-100  rounded-0 border-0 d-flex p-0"
-                    >
-                      <img
-                        src={require("../asset/images/Button_Add2.png")}
-                        className="img-fluid"
-                        alt=""
-                        style={{
-                          width: "35px",
-                          marginRight: "5px",
+                              .publishTime,
+                            moment
+                              .duration(
+                                allYoutubeSearchVideoData[videoIndex].duration
+                              )
+                              .asSeconds(),
+                            (allYoutubeSearchVideoData[videoIndex].tags = null),
+                            allYoutubeSearchVideoData[videoIndex].snippet
+                              .channelTitle,
+                            "https://www.youtube.com/channel/" +
+                              allYoutubeSearchVideoData[videoIndex].snippet
+                                .channelId,
+                            allYoutubeSearchVideoData[videoIndex].snippet
+                              .thumbnails.high.url,
+                            allYoutubeSearchVideoData[videoIndex].snippet
+                              .description,
+                            '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
+                              allYoutubeSearchVideoData[videoIndex].id.videoId +
+                              '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                            allYoutubeSearchVideoData[videoIndex].category,
+                            null
+                          );
                         }}
-                      />
-                      <span
-                        className="m-auto"
-                        style={{
-                          textTransform: "uppercase",
-                          fontSize: "90%",
-                          color: "white",
-                        }}
+                        className="btn w-100  rounded-0 border-0 d-flex p-0"
                       >
-                        <strong>ADD</strong>
-                      </span>
-                    </button>
+                        <img
+                          src={require("../asset/images/Button_Add2.png")}
+                          className="img-fluid"
+                          alt=""
+                          style={{
+                            width: "35px",
+                            marginRight: "5px",
+                          }}
+                        />
+                        <span
+                          className="m-auto"
+                          style={{
+                            textTransform: "uppercase",
+                            fontSize: "90%",
+                            color: "white",
+                          }}
+                        >
+                          <strong>ADD</strong>
+                        </span>
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="btn w-100  rounded-0 border-0 d-flex p-0"
+                      >
+                        <img
+                          src={require("../asset/images/Button_Add2.png")}
+                          className="img-fluid"
+                          alt=""
+                          style={{
+                            width: "35px",
+                            marginRight: "5px",
+                          }}
+                        />
+                        <span
+                          className="m-auto"
+                          style={{
+                            textTransform: "uppercase",
+                            fontSize: "90%",
+                            color: "white",
+                          }}
+                        >
+                          <strong>ADD</strong>
+                        </span>
+                      </button>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -1470,39 +1493,35 @@ export const PlaylistPlayer = ({ playlists }) => {
 
               <div
                 onClick={() => {
-                  setYoutubePlay(true);
+                  if(searchKeyword !== ""){setYoutubePlay(true);
                   setYoutubePlayUrl(videoAllSearchData[videoIndex + 1].link);
                   setVideoIndex(videoIndex + 1);
+                  }
                 }}
                 className="col-4 my-2 addListButton"
               >
                 <div className="todayList  buttonPadding">
-                  {allYoutubeSearchVideoData.length != 0 ? (
+                  {searchKeyword !== "" ? (
                     <button
                       onClick={() => {
-                        if (searchKeyword == "") {
-                          // alert("Please Search Something");
-                        }
                         {
-                          if (searchKeyword !== "") {
-                            setYoutubePlay(true);
+                          setYoutubePlay(true);
 
-                            setYoutubePlayUrl(
-                              "https://www.youtube.com/watch?v=" +
-                                allYoutubeSearchVideoData[videoIndex + 1].id
-                                  .videoId
-                            );
-                            setVideoIndex(videoIndex + 1);
-                            setYoutubePlay(true);
-                            setYoutubePlayUrl(
-                              videoAllSearchData[videoIndex + 1].link
-                            );
-                            setYoutubePlay(true);
-                            setYoutubePlayUrl(
-                              videoAllSearchData[videoIndex + 1].link
-                            );
-                            setVideoIndex(videoIndex + 1);
-                          }
+                          setYoutubePlayUrl(
+                            "https://www.youtube.com/watch?v=" +
+                              allYoutubeSearchVideoData[videoIndex + 1].id
+                                .videoId
+                          );
+                          setVideoIndex(videoIndex + 1);
+                          setYoutubePlay(true);
+                          setYoutubePlayUrl(
+                            videoAllSearchData[videoIndex + 1].link
+                          );
+                          setYoutubePlay(true);
+                          setYoutubePlayUrl(
+                            videoAllSearchData[videoIndex + 1].link
+                          );
+                          setVideoIndex(videoIndex + 1);
                         }
                       }}
                       className="btn w-100  rounded-0 border-0 d-flex p-0"
@@ -2089,11 +2108,12 @@ export const PlaylistPlayer = ({ playlists }) => {
                 ></button>
               </div>
               <div className="modal-body">
-                <form 
-                 onSubmit={(e) => {
-                  e.preventDefault();
-                  addEmbedVideoInTeampPlayList();
-                }}>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    addEmbedVideoInTeampPlayList();
+                  }}
+                >
                   <div className="form-group">
                     <label>Embed Video</label>
                     <input
