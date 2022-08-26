@@ -2,14 +2,22 @@
     font-family: AstroSpace;
     src: url(../font/AstroSpace-eZ2Bg.ttf);
   }
+
+  @font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Regular.woff);
+  }
 .main-container {
-    font-family: AstroSpace,"aAstroSpace"!important;
+    font-family: Roboto,"aAstroSpace";
     position: static;
     /* background-color: rgba(0, 0, 0, 0.4); */
     height: 100vh;
     /* margin: -130px auto 0 auto; */
     z-index: 99;
 
+}
+.astroSpace{
+    font-family: AstroSpace,"aAstroSpace"!important;
 }
 
 .css-1g7fu7m-MuiContainer-root{

@@ -20,6 +20,26 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 //  Home page main function
 function Home() {
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    // Featch All Data
+    axios
+      .get(process.env.REACT_APP_API_URL + "/user/getUserAlldata", {
+        headers: { Token: token },
+      })
+      .then((response) => {
+        response.data.forEach((element, index) => {
+          if (
+            element._id !=
+            JSON.parse(sessionStorage.getItem("userDetails")).user_id
+          ) {
+            sessionStorage.clear();
+            navigate("/logout");
+          }
+        });
+      });
+  }, []);
   const style = {
     background: "transparent",
     borderRadius: 3,

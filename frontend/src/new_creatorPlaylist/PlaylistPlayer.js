@@ -15,6 +15,25 @@ const axios = require("axios");
 toast.configure();
 
 export const PlaylistPlayer = ({ playlists }) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    // Featch All Data
+    axios
+      .get(process.env.REACT_APP_API_URL + "/user/getUserAlldata", {
+        headers: { Token: token },
+      })
+      .then((response) => {
+        response.data.forEach((element, index) => {
+          if (
+            element._id !=
+            JSON.parse(sessionStorage.getItem("userDetails")).user_id
+          ) {
+            sessionStorage.clear();
+            navigate("/logout");
+          }
+        });
+      });
+  }, []);
   // Auth
   const navigate = useNavigate();
 
@@ -436,18 +455,6 @@ export const PlaylistPlayer = ({ playlists }) => {
     });
   };
   //Get User Data
-  const [allData, setallData] = useState([]);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    // Featch All Data
-    axios
-      .get(process.env.REACT_APP_API_URL + "/user/getAlldata", {
-        headers: { Token: token },
-      })
-      .then((response) => {
-        setallData(response.data);
-      });
-  }, []);
 
   //  Save Playlist
   const saveYoutubePalylist = () => {
@@ -894,7 +901,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "30px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -916,7 +923,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "30px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -944,7 +951,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "30px", marginRight: "1px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -966,7 +973,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "30px", marginRight: "1px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1154,7 +1161,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "28px" }}
                       />
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1175,7 +1182,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "28px" }}
                       />
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1201,7 +1208,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "28px" }}
                       />
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1222,7 +1229,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "28px" }}
                       />
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1255,7 +1262,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       style={{ width: "28px" }}
                     />
                     <span
-                      className="m-auto text-white"
+                      className="m-auto text-white astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -1343,7 +1350,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "35px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1365,7 +1372,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "35px" }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1449,7 +1456,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                           }}
                         />
                         <span
-                          className="m-auto"
+                          className="m-auto astroSpace"
                           style={{
                             textTransform: "uppercase",
                             fontSize: "90%",
@@ -1474,7 +1481,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                           }}
                         />
                         <span
-                          className="m-auto"
+                          className="m-auto astroSpace"
                           style={{
                             textTransform: "uppercase",
                             fontSize: "90%",
@@ -1493,9 +1500,10 @@ export const PlaylistPlayer = ({ playlists }) => {
 
               <div
                 onClick={() => {
-                  if(searchKeyword !== ""){setYoutubePlay(true);
-                  setYoutubePlayUrl(videoAllSearchData[videoIndex + 1].link);
-                  setVideoIndex(videoIndex + 1);
+                  if (searchKeyword !== "") {
+                    setYoutubePlay(true);
+                    setYoutubePlayUrl(videoAllSearchData[videoIndex + 1].link);
+                    setVideoIndex(videoIndex + 1);
                   }
                 }}
                 className="col-4 my-2 addListButton"
@@ -1536,7 +1544,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1561,7 +1569,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         }}
                       />
                       <span
-                        className="m-auto"
+                        className="m-auto astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -1592,7 +1600,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       style={{ width: "35px" }}
                     />
                     <span
-                      className="m-auto"
+                      className="m-auto astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -1615,7 +1623,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       style={{ width: "27px" }}
                     />
                     <span
-                      className="m-auto"
+                      className="m-auto astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -1644,7 +1652,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       style={{ width: "27px" }}
                     />
                     <span
-                      className="m-auto"
+                      className="m-auto astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -1878,7 +1886,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       style={{ width: "28px" }}
                     />
                     <span
-                      className="m-auto text-white"
+                      className="m-auto text-white astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -1897,7 +1905,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                     className="btn w-100  rounded-0 border-0 d-flex p-0"
                   >
                     <span
-                      className="m-auto text-white"
+                      className="m-auto text-white astroSpace"
                       style={{
                         textTransform: "uppercase",
                         fontSize: "90%",
@@ -2281,7 +2289,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                     style={{ width: "30px" }}
                   />
                   <span
-                    className="m-2"
+                    className="m-2 astroSpace"
                     style={{
                       textTransform: "uppercase",
                       fontSize: "90%",
@@ -2388,7 +2396,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                               style={{ width: "35px" }}
                             />
                             <span
-                              className="m-auto"
+                              className="m-auto astroSpace"
                               style={{
                                 textTransform: "uppercase",
                                 fontSize: "90%",
@@ -2412,7 +2420,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                               style={{ width: "35px" }}
                             />
                             <span
-                              className="m-auto"
+                              className="m-auto astroSpace"
                               style={{
                                 textTransform: "uppercase",
                                 fontSize: "90%",
@@ -2440,7 +2448,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                             style={{ width: "27px" }}
                           />
                           <span
-                            className="m-auto"
+                            className="m-auto astroSpace"
                             style={{
                               textTransform: "uppercase",
                               fontSize: "90%",
@@ -2465,7 +2473,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                             style={{ width: "27px" }}
                           />
                           <span
-                            className="m-auto"
+                            className="m-auto astroSpace"
                             style={{
                               textTransform: "uppercase",
                               fontSize: "90%",
@@ -2748,7 +2756,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                         style={{ width: "28px" }}
                       />
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",
@@ -2767,7 +2775,7 @@ export const PlaylistPlayer = ({ playlists }) => {
                       className="btn w-100  rounded-0 border-0 d-flex p-0"
                     >
                       <span
-                        className="m-auto text-white"
+                        className="m-auto text-white astroSpace"
                         style={{
                           textTransform: "uppercase",
                           fontSize: "90%",

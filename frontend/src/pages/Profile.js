@@ -112,6 +112,13 @@ function Profile() {
         setallUserData(response.data);
         response.data.forEach((element, index) => {
           if (
+            element._id !=
+            JSON.parse(sessionStorage.getItem("userDetails")).user_id
+          ) {
+            sessionStorage.clear();
+            navigate("/logout");
+          }
+          if (
             element._id ==
             JSON.parse(sessionStorage.getItem("userDetails")).user_id
           ) {
@@ -122,12 +129,16 @@ function Profile() {
             if (Address == null) setAddress(element.Address);
             if (userAbout == null) setUserAbout(element.userAbout);
             setCurrentUserDetails(element);
-            console.log(element);
+            console.log(element._id);
+            console.log(
+              JSON.parse(sessionStorage.getItem("userDetails")).user_id
+            );
           }
         });
       });
   }, []);
-  // console.log(allUserData);
+
+  // console.log(CurrentUserDetails);
   // console.log(JSON.parse(sessionStorage.getItem("userDetails")).user_id);
 
   // Get Reserved Space
@@ -478,7 +489,7 @@ function Profile() {
                         </h5>
                         {TextArea ? (
                           <button
-                          type="button"
+                            type="button"
                             className="btn btn-primary float-end  mb-3"
                             // onClick={setTextAreaChange}
                             onClick={(e) => {
